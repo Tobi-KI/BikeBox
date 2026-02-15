@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BikeBox Tauschbörse</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="hero">
+      <div>
+        <h1 data-i18n="title">BikeBox Tauschbörse</h1>
+        <p data-i18n="subtitle">
+          Finde oder teile Fahrradkartons für den Flugtransport – lokal und nachhaltig.
+        </p>
+      </div>
+      <label class="language-switcher" for="language">
+        <span data-i18n="languageLabel">Sprache</span>
+        <select id="language" aria-label="Sprache auswählen">
+          <option value="de">Deutsch</option>
+          <option value="en">English</option>
+        </select>
+      </label>
+    </header>
+
+    <main>
+      <section class="card">
+        <h2 data-i18n="createPost">Neuen Eintrag erstellen</h2>
+        <form id="postForm">
+          <div class="form-grid">
+            <label>
+              <span data-i18n="typeLabel">Typ</span>
+              <select id="type" required>
+                <option value="offer" data-i18n="offer">Angebot</option>
+                <option value="request" data-i18n="request">Gesuch</option>
+              </select>
+            </label>
+
+            <label>
+              <span data-i18n="titleLabel">Titel</span>
+              <input id="postTitle" type="text" required maxlength="80" />
+            </label>
+
+            <label>
+              <span data-i18n="cityLabel">Stadt</span>
+              <input id="city" type="text" required maxlength="60" />
+            </label>
+
+            <label>
+              <span data-i18n="contactLabel">Kontakt</span>
+              <input id="contact" type="text" required maxlength="80" />
+            </label>
+
+            <label>
+              <span data-i18n="latLabel">Breitengrad</span>
+              <input id="lat" type="number" step="any" min="-90" max="90" required />
+            </label>
+
+            <label>
+              <span data-i18n="lngLabel">Längengrad</span>
+              <input id="lng" type="number" step="any" min="-180" max="180" required />
+            </label>
+          </div>
+
+          <label>
+            <span data-i18n="descLabel">Beschreibung</span>
+            <textarea id="description" rows="4" maxlength="300" required></textarea>
+          </label>
+
+          <button type="submit" data-i18n="submitBtn">Eintrag speichern</button>
+        </form>
+      </section>
+
+      <section class="layout-grid">
+        <article class="card">
+          <h2 data-i18n="mapTitle">Karte</h2>
+          <p data-i18n="mapHint">Grün = Angebot, Orange = Gesuch</p>
+          <div id="map" aria-label="Karte mit BikeBox-Einträgen"></div>
+        </article>
+
+        <article class="card">
+          <h2 data-i18n="listTitle">Aktuelle Einträge</h2>
+          <ul id="postList"></ul>
+        </article>
+      </section>
+    </main>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="app.js"></script>
+  </body>
+</html>
