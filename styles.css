@@ -1,0 +1,158 @@
+:root {
+  color-scheme: light;
+  font-family: "Inter", "Segoe UI", sans-serif;
+  line-height: 1.4;
+  --bg: #f2f7f5;
+  --card: #ffffff;
+  --accent: #1f7a4d;
+  --accent-alt: #dc7f1f;
+  --text: #172018;
+  --muted: #617068;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 2rem 1.2rem 1rem;
+  background: linear-gradient(180deg, #def5e8 0%, #f2f7f5 100%);
+}
+
+h1,
+h2,
+p {
+  margin: 0;
+}
+
+.hero p {
+  margin-top: 0.4rem;
+  color: var(--muted);
+}
+
+.language-switcher {
+  display: grid;
+  gap: 0.2rem;
+  font-size: 0.9rem;
+}
+
+main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1rem 1.2rem 2rem;
+}
+
+.card {
+  background: var(--card);
+  border-radius: 14px;
+  padding: 1rem;
+  box-shadow: 0 8px 24px rgba(24, 61, 42, 0.08);
+}
+
+#postForm {
+  display: grid;
+  gap: 1rem;
+  margin-top: 0.8rem;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 0.8rem;
+}
+
+label {
+  display: grid;
+  gap: 0.35rem;
+  font-size: 0.92rem;
+}
+
+input,
+select,
+textarea,
+button {
+  border: 1px solid #c5d7cd;
+  border-radius: 8px;
+  padding: 0.58rem 0.65rem;
+  font: inherit;
+}
+
+button {
+  width: fit-content;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.layout-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+#map {
+  height: 420px;
+  border-radius: 10px;
+  margin-top: 0.8rem;
+}
+
+#postList {
+  list-style: none;
+  margin: 0.9rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.7rem;
+}
+
+#postList li {
+  border: 1px solid #dbe8df;
+  border-left: 5px solid var(--accent);
+  border-radius: 8px;
+  padding: 0.6rem;
+}
+
+#postList li.request {
+  border-left-color: var(--accent-alt);
+}
+
+.entry-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.entry-type {
+  font-size: 0.75rem;
+  color: #fff;
+  border-radius: 999px;
+  padding: 0.15rem 0.5rem;
+  background: var(--accent);
+}
+
+.entry-type.request {
+  background: var(--accent-alt);
+}
+
+.entry-meta {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+@media (max-width: 860px) {
+  .layout-grid {
+    grid-template-columns: 1fr;
+  }
+}
