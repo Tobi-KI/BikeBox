@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ETF-Sparplan Rückblick</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="container">
+      <h1>ETF-Sparplan Rückblick</h1>
+      <p class="intro">
+        Simuliere, wie sich ein monatlicher Betrag (z. B. 430 € für eine Hypothek)
+        entwickelt hätte, wenn er stattdessen in einen ETF investiert worden wäre.
+      </p>
+
+      <section class="card">
+        <h2>Eingaben</h2>
+        <form id="sim-form" class="grid">
+          <label>
+            Symbol (Stooq)
+            <input id="symbol" value="a2pkxg.de" required />
+          </label>
+
+          <label>
+            Startmonat
+            <input id="start-month" type="month" value="2012-01" required />
+          </label>
+
+          <label>
+            Enddatum
+            <input id="end-date" type="date" />
+          </label>
+
+          <label>
+            Monatliche Rate (€)
+            <input id="monthly" type="number" min="1" step="0.01" value="430" required />
+          </label>
+
+          <label>
+            Einmalanlage zu Beginn (€)
+            <input id="initial" type="number" min="0" step="0.01" value="0" required />
+          </label>
+
+          <button type="submit">Simulation starten</button>
+        </form>
+
+        <p class="hint">
+          Datenquelle: Stooq-Tagesdaten (Close). Bei Bedarf kannst du ein anderes Symbol
+          verwenden, z. B. <code>vwce.de</code>.
+        </p>
+      </section>
+
+      <section id="status" class="status" aria-live="polite"></section>
+
+      <section id="results" class="card hidden">
+        <h2>Ergebnis</h2>
+        <div class="metrics" id="metrics"></div>
+        <canvas id="chart" width="1000" height="420" aria-label="Portfolio Chart"></canvas>
+
+        <h3>Monatliche Käufe (erste 12 Zeilen)</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Datum</th>
+                <th>Kurs (€)</th>
+                <th>Rate (€)</th>
+                <th>Stücke</th>
+                <th>Gesamtstücke</th>
+                <th>Depotwert (€)</th>
+              </tr>
+            </thead>
+            <tbody id="purchase-body"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
