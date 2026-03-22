@@ -39,28 +39,23 @@ form.addEventListener('submit', async (event) => {
 });
 
 async function loadStooqData(symbol) {
-  const url = `https://stooq.com/q/d/l/?s=${encodeURIComponent(symbol)}&i=d`;
+  const url = `/api/prices?symbol=${encodeURIComponent(symbol)}`;
   const res = await fetch(url);
+  const data = await res.json().catch(() => ({}));
 
   if (!res.ok) {
-    throw new Error('Kursdaten konnten nicht geladen werden. Bitte Symbol prüfen.');
+    throw new Error(data.error || 'Kursdaten konnten nicht geladen werden.');
   }
 
-  const csv = await res.text();
-  const lines = csv.trim().split('\n');
+  const prices = (data.prices || []).map((row) => ({
+    date: row.date,
+    ts: new Date(row.date + 'T00:00:00Z').getTime(),
+    close: Number(row.close),
+  })).filter((row) => Number.isFinite(row.close));
 
-  if (lines.length < 5) {
+  if (prices.length < 5) {
     throw new Error('Zu wenige Kursdaten gefunden.');
   }
-
-  const prices = lines.slice(1).map((line) => {
-    const [date, , , , close] = line.split(',');
-    return {
-      date,
-      ts: new Date(date + 'T00:00:00Z').getTime(),
-      close: Number(close),
-    };
-  }).filter((row) => Number.isFinite(row.close));
 
   prices.sort((a, b) => a.ts - b.ts);
   return prices;

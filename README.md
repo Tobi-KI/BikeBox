@@ -2,6 +2,11 @@
 
 Kleines Web-Tool, um rückblickend zu simulieren, wie sich ein monatlicher Sparbetrag (z. B. 430 €) in einem ETF entwickelt hätte.
 
+## Wichtig: gegen "Failed to fetch"
+
+Die App nutzt einen lokalen Backend-Proxy (`/api/prices`), damit es **keine CORS-Fehler** beim Laden der Stooq-Kurse gibt.
+Darum bitte **nicht** mit reinem Static Hosting starten, sondern mit dem Python-Server unten.
+
 ## Features
 
 - Verwendet historische Tageskurse von Stooq (Close-Kurse)
@@ -13,7 +18,7 @@ Kleines Web-Tool, um rückblickend zu simulieren, wie sich ein monatlicher Sparb
 ## Lokal starten
 
 ```bash
-python -m http.server 8000
+python server.py
 ```
 
 Dann im Browser öffnen:
@@ -31,7 +36,6 @@ http://localhost:8000
 
 Das Tool zeigt dann, wie viel investiert worden wäre und welchen Depotwert du mit den realen Kursdaten gehabt hättest.
 
-## Hinweis
+## Deployment-Hinweis
 
-- Daten kommen direkt von `stooq.com`.
-- Falls ein Symbol nicht gefunden wird, ein anderes Stooq-Symbol eingeben (z. B. `vwce.de`).
+Wenn du die App auf einem Server betreibst, muss derselbe Prozess sowohl die statischen Dateien als auch den Endpoint `/api/prices` ausliefern.
